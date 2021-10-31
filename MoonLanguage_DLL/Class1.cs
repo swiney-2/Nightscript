@@ -35,9 +35,6 @@ namespace Moon
                         case "DELETE":
                             HttpClient.DeleteAsync(Url);
                             break;
-                        case "BALLS":
-                            MessageBox.Show("lmao balls\n\n\n\n\n\n\n\n\n\n\n\n\n\\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n balls");
-                            break;
                         default:
                             MessageBox.Show("Invalid Method, Please Use GET Or DELETE Methods", "Moon", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
@@ -231,4 +228,7 @@ namespace Moon
         public static void Delay<T>(T Amount)
             => Thread.Sleep(Convert.ToInt32(Amount));
     }
+    ///<summary>
+    /// i hate my life
+    ///</summary>
 }
