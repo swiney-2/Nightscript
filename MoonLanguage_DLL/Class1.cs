@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,7 +36,7 @@ namespace Moon
                             HttpClient.DeleteAsync(Url);
                             break;
                         default:
-                            MessageBox.Show("Invalid Method, Please Use GET Or DELETE Methods", "Moon", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            throw new Exception("Invalid HttpRequest method.\nPlease use GET or DELETE");
                             break;
                     }
                 }
@@ -54,6 +54,15 @@ namespace Moon
                 woobie.Kill();
             }
         }
+        public static void Start(string path)
+            => Process.Start(path);
+        public static bool Exists(string procname) {
+            if (Process.GetProcessesByName(procname).Length > 0)
+            {
+                return true;
+            }
+            else return false;
+        }
     }
     public class FileSystem
     {
@@ -61,36 +70,33 @@ namespace Moon
         {
             string Text = null;
 
-            if (!string.IsNullOrEmpty(Path))
+            if (!string.IsNullOrEmpty(Path) || !string.IsNullOrWhiteSpace(Path) )
             {
-                if (!File.Exists(Path))
-                    MessageBox.Show($"Invalid Path Located At {Path}", "Moon", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else
-                {
-                    Text = File.ReadAllText(Path);
-                }
+                if (!File.Exists(Path)) { throw new Exception($"Invalid Path Located At {Path}"); }
+                else { Text = File.ReadAllText(Path); }
             }
-            else { Text = string.Empty; }
+            else { throw new Exception("File Path cannot be empty\n\nMoon.ReadFile"); }
 
             return Text;
         }
 
         public static bool FolderExists(string DirectoryPath)
         {
-            if (!Directory.Exists(DirectoryPath)) { return false; }
-            else { return true; }
+            if (!string.IsNullOrEmpty(DirectoryPath) || !string.IsNullOrWhiteSpace(DirectoryPath))
+            {
+                if (!Directory.Exists(DirectoryPath)) { return false; }
+                else { return true; }
+            }
+            else { throw new Exception("Folder Exists directory cannot be empty\n\nMoon.FolderExists"); }
         }
 
         public static void DeleteDirectory(string Path)
         {
-            if (!string.IsNullOrEmpty(Path))
+            if (!string.IsNullOrEmpty(Path) || !string.IsNullOrWhiteSpace(Path))
             {
-                if (Directory.Exists(Path)) { Directory.Delete(Path); }
+                if (Directory.Exists(Path)) { Directory.Delete(Path); } else { throw new Exception($"Invalid path located at {Path}"); }
             }
-            else
-            {
-                MessageBox.Show("Invalid Directory Path", "Moon", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            else { throw new Exception("Delete Directory path cannot be empty\n\nMoon.DeleteDirectory"); }
         }
 
         public static void AppendText(string Path, string Data)
@@ -98,42 +104,32 @@ namespace Moon
             if (!string.IsNullOrEmpty(Path) || !string.IsNullOrEmpty(Data))
             {
                 using (var StreamWriter = File.AppendText(Path))
-                {
-                    StreamWriter.Write(Data);
-                    StreamWriter.Close();
-                }
+                { StreamWriter.Write(Data); StreamWriter.Close(); }
             }
-            else
-            {
-                MessageBox.Show($"Invalid Path Located At {Path}", "Moon", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            else { throw new Exception($"Invalid Path Located At {Path}"); }
         }
 
         public static void MakeDirectory(string Path)
         {
-            if (!string.IsNullOrEmpty(Path)) { Directory.CreateDirectory(Path); }
-            else { MessageBox.Show($"Invalid Path Located At {Path}", "Moon", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            if (!string.IsNullOrEmpty(Path) || !string.IsNullOrWhiteSpace(Path)) { Directory.CreateDirectory(Path); }
+            else { throw new Exception($"Invalid Path Located At {Path}"); }
         }
 
         public static void WriteFile(string Path, string Data)
         {
-            if (!string.IsNullOrEmpty(Path))
-            {
-                if (!File.Exists(Path)) { MessageBox.Show($"Invalid Path Located At {Path}", "Moon", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            if (!string.IsNullOrEmpty(Path) || !string.IsNullOrWhiteSpace(Path)) {
+                if (!File.Exists(Path)) { throw new Exception($"Invalid Path Located At {Path}"); }
                 else { File.WriteAllText(Path, Data); }
             }
-            else
-            {
-                MessageBox.Show($"Invalid Path Located At {Path}", "Moon", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            else throw new Exception($"Invalid Path Located At {Path}");
         }
         public static void MakeFile(string path)
         {
-            if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(path) || string.IsNullOrWhiteSpace(path))
             {
                 File.Create(path);
             }
-            MessageBox.Show("Path cannot be null or empty!");
+            else { throw new Exception("Path cannot be null/empty/whitespace"); }
         }
         public static bool DeleteFile(string FilePath)
         {
@@ -143,10 +139,7 @@ namespace Moon
                 File.Delete(FilePath);
                 Result = true;
             }
-            else
-            {
-                MessageBox.Show($"Invalid Path Located At {FilePath}", "Moon", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            else { throw new Exception($"Invalid Path Located At {FilePath}"); }
             return Result;
         }
 
@@ -172,52 +165,66 @@ namespace Moon
         public static void ReadLine()
             => Console.ReadLine();
 
-        public static void Debug(string Text)
-            => Console.WriteLine($"[Debug] {Text}");
+        public static void DebugWrite(string Text)
+            => Debug.WriteLine($"[MOON] {Text}");
 
         public static void Print(string Text)
             => Console.Write(Text);
+        public static void SetForeground(ConsoleColor color)
+            => Console.ForegroundColor = color;
     }
     
     public static class Crypt
     {
         public static string Sha256Hash(string RawData)
         {
-            using (SHA256 Sha256Hash = SHA256.Create())
+            if (!string.IsNullOrEmpty(RawData) || string.IsNullOrWhiteSpace(RawData))
             {
-                byte[] Bytes = Sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(RawData));
-
-                StringBuilder Builder = new StringBuilder();
-                for (int i = 0; i < Bytes.Length; i++)
+                using (SHA256 Sha256Hash = SHA256.Create())
                 {
-                    Builder.Append(Bytes[i].ToString("x2"));
+                    byte[] Bytes = Sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(RawData));
+
+                    StringBuilder Builder = new StringBuilder();
+                    for (int i = 0; i < Bytes.Length; i++)
+                    {
+                        Builder.Append(Bytes[i].ToString("x2"));
+                    }
+                    return Builder.ToString();
                 }
-                return Builder.ToString();
             }
+            else { throw new Exception("Data to hash cannot be empty"); }
         }
 
         public class Base64
         {
             public static string Encode(string Data)
             {
-                string Result = null;
-                if (!string.IsNullOrEmpty(Data))
+                if (!string.IsNullOrEmpty(Data) || string.IsNullOrWhiteSpace(Data))
                 {
-                    var EncodeData = Encoding.UTF8.GetBytes(Data);
-                    Result = Convert.ToBase64String(EncodeData);
+                    string Result = null;
+                    if (!string.IsNullOrEmpty(Data))
+                    {
+                        var EncodeData = Encoding.UTF8.GetBytes(Data);
+                        Result = Convert.ToBase64String(EncodeData);
+                    }
+                    return Result;
                 }
-                return Result;
+                else { throw new Exception("Data to Encode cannot be empty"); }
             }
 
             public static string Decode(string Data)
             {
-                string Result = null;
-                if (!string.IsNullOrEmpty(Data))
+                if (!string.IsNullOrEmpty(Data) || !string.IsNullOrWhiteSpace(Data))
                 {
-                    byte[] Decoded = Convert.FromBase64String(Data);
-                    Result = Encoding.UTF8.GetString(Decoded);
+                    string Result = null;
+                    if (!string.IsNullOrEmpty(Data))
+                    {
+                        byte[] Decoded = Convert.FromBase64String(Data);
+                        Result = Encoding.UTF8.GetString(Decoded);
+                    }
+                    return Result;
                 }
-                return Result;
+                else { throw new Exception("String to Decode cannot be null/empty."); }
             }
         }
 
@@ -228,7 +235,4 @@ namespace Moon
         public static void Delay<T>(T Amount)
             => Thread.Sleep(Convert.ToInt32(Amount));
     }
-    ///<summary>
-    /// i hate my life
-    ///</summary>
 }
