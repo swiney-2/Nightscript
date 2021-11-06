@@ -1,4 +1,4 @@
-# MoonLanguage
+# Nightscript
 weenis
 
 # Info
