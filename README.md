@@ -1,5 +1,5 @@
 # Nightscript
-weenis
+Note that some stuff might be called Moon because that was the original name 😎
 
 # Info
 Some kind of language thing
