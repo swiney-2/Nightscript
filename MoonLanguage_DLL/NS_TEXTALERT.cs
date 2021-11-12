@@ -17,7 +17,7 @@ namespace Nightscript
             TXTALRT_ABORT_RETRY_IGNORE,
             TXTALRT_RETRY_CANCEL,
         }
-        public enum NS_TEXTALERT_ICON { 
+ /*       public enum NS_TEXTALERT_ICON { 
          TXTALRT_NONE,
          TXTALRT_HAND,
             TXTALRT_QUESTION,
@@ -28,6 +28,8 @@ namespace Nightscript
             TXTALRT_ERROR,
             TXTALRT_INFORMATION,
         }
+        am gonna do that part later 
+        */
         public static void NEW(string text, string label, NS_TEXTALERT_BUTTON button, NS_TEXTALERT_ICON icon) {
             switch (button) {
                 case NS_TEXTALERT_BUTTON.TXTALRT_OK:
