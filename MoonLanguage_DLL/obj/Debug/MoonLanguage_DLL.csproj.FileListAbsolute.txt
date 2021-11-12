@@ -1,6 +1,0 @@
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\bin\Debug\MoonLanguage_DLL.dll
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\bin\Debug\MoonLanguage_DLL.pdb
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\obj\Debug\MoonLanguage_DLL.csproj.AssemblyReference.cache
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\obj\Debug\MoonLanguage_DLL.csproj.CoreCompileInputs.cache
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\obj\Debug\MoonLanguage_DLL.dll
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\obj\Debug\MoonLanguage_DLL.pdb
