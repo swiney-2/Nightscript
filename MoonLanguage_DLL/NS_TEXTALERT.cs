@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +7,10 @@ using System.Windows.Forms;
 
 namespace Nightscript
 {
-    class NS_TEXTALERT
+    class NS_MESSAGEBOX
     {
-        public enum NS_TEXTALERT_BUTTON {
+        public enum NS_MESSAGEBOX_BUTTON
+        {
             TXTALRT_OK,
             TXTALRT_OKCANCEL,
             TXTALRT_YESNO,
@@ -17,7 +18,8 @@ namespace Nightscript
             TXTALRT_ABORT_RETRY_IGNORE,
             TXTALRT_RETRY_CANCEL,
         }
- /*       public enum NS_TEXTALERT_ICON { 
+        public enum NS_MESSAGEBOX_ICON
+        { 
          TXTALRT_NONE,
          TXTALRT_HAND,
             TXTALRT_QUESTION,
@@ -28,26 +30,24 @@ namespace Nightscript
             TXTALRT_ERROR,
             TXTALRT_INFORMATION,
         }
-        am gonna do that part later 
-        */
-        public static void NEW(string text, string label, NS_TEXTALERT_BUTTON button, NS_TEXTALERT_ICON icon) {
+        public static void NEW(string text, string label, NS_MESSAGEBOX_BUTTON button/*, NS_TEXTALERT_ICON icon*/) {
             switch (button) {
-                case NS_TEXTALERT_BUTTON.TXTALRT_OK:
+                case NS_MESSAGEBOX_BUTTON.TXTALRT_OK:
                     MessageBox.Show(text, label, MessageBoxButtons.OK);
                     break;
-                case NS_TEXTALERT_BUTTON.TXTALRT_OKCANCEL:
+                case NS_MESSAGEBOX_BUTTON.TXTALRT_OKCANCEL:
                     MessageBox.Show(text, label, MessageBoxButtons.OKCancel);
                     break;
-                case NS_TEXTALERT_BUTTON.TXTALRT_YESNO:
+                case NS_MESSAGEBOX_BUTTON.TXTALRT_YESNO:
                     MessageBox.Show(text, label, MessageBoxButtons.YesNo);
                     break;
-                case NS_TEXTALERT_BUTTON.TXTALRT_YESNOCANCEL:
+                case NS_MESSAGEBOX_BUTTON.TXTALRT_YESNOCANCEL:
                     MessageBox.Show(text, label, MessageBoxButtons.YesNoCancel);
                     break;
-                case NS_TEXTALERT_BUTTON.TXTALRT_ABORT_RETRY_IGNORE:
+                case NS_MESSAGEBOX_BUTTON.TXTALRT_ABORT_RETRY_IGNORE:
                     MessageBox.Show(text, label, MessageBoxButtons.AbortRetryIgnore);
                     break;
-                case NS_TEXTALERT_BUTTON.TXTALRT_RETRY_CANCEL:
+                case NS_MESSAGEBOX_BUTTON.TXTALRT_RETRY_CANCEL:
                     MessageBox.Show(text, label, MessageBoxButtons.RetryCancel);
                     break;
             }
