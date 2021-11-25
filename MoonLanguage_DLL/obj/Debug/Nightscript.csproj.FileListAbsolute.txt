@@ -1,8 +1,0 @@
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\bin\Debug\Nightscript.dll
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\bin\Debug\Nightscript.pdb
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\bin\Release\Nightscript.pdb
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\obj\Debug\Nightscript.csproj.CoreCompileInputs.cache
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\obj\Debug\Nightscript.pdb
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\bin\Release\Nightscript.exe
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\obj\Debug\Nightscript.exe
-C:\Users\rever\source\repos\MoonLanguage_DLL\MoonLanguage_DLL\obj\Debug\Nightscript.csproj.AssemblyReference.cache
