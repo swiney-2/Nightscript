@@ -1,3 +1,7 @@
+# READ THIS
+
+Development paused
+
 # Nightscript
 Note that some stuff might be called Moon because that was the original name 😎
 
